@@ -36,7 +36,13 @@ The harness can run one isolated attempt at a time. It records the model, reason
 
 ## Local use
 
-The run instructions are in [docs/ONE_RUN.md](docs/ONE_RUN.md). The public site can be opened directly from `index.html` or viewed at [minemark.pages.dev](https://minemark.pages.dev/).
+Prepare a real run with one command:
+
+~~~powershell
+.\tools\benchmark-run.ps1 -Mode prepare -Model gpt-5.6-terra -ReasoningEffort low -FreshTaskAttested -PriorContextExcludedAttested
+~~~
+
+The command prints the run folder, prompt path, and restored world name. After the agent has saved and quit Minecraft, run `benchmark-run.ps1 -Mode grade` with that run folder. Full instructions are in [docs/ONE_RUN.md](docs/ONE_RUN.md). The public site can be opened directly from `index.html` or viewed at [minemark.pages.dev](https://minemark.pages.dev/).
 
 ## Contributing
 

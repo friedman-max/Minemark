@@ -5,8 +5,8 @@ This is the repeatable protocol for one candidate benchmark run. The agent never
 ## Before the run
 
 1. Use the dedicated `Minemark Benchmark` Launcher installation, whose game directory is `C:\MinemarkRuntime\.minecraft`. It is isolated from the everyday Minecraft profile.
-2. Run `reset-benchmark-runtime.ps1`, then create a run with `start-run.ps1`, explicitly providing the model and reasoning effort, and restore its named scenario with `restore-scenario.ps1`.
-3. Run `preflight-run.ps1` against the restored world. It must pass all checks: byte-for-byte snapshot match, baseline client settings, empty inventory, target absent, Survival mode, expected difficulty, and commands disabled.
+2. Prepare the run with one command: `benchmark-run.ps1 -Mode prepare -Model <model> -ReasoningEffort <effort> -FreshTaskAttested -PriorContextExcludedAttested`. It resets client settings, restores the world, records run configuration, and runs preflight.
+3. Check that preparation reports `ready_for_agent`. Preflight must pass all checks: byte-for-byte snapshot match, baseline client settings, empty inventory, target absent, Survival mode, expected difficulty, and commands disabled.
 4. Start a brand-new Codex task. Do not follow up on any benchmark task and do not make prior benchmark material agent-visible.
 5. Give the agent only the generated `prompt.txt`. It may use visible desktop control to operate Minecraft; it does not receive a Minecraft API or evaluator endpoint.
 6. Start recording and the timer at the first agent action.
@@ -21,7 +21,7 @@ This is the repeatable protocol for one candidate benchmark run. The agent never
 ## After the run
 
 1. Privately preserve the recording and, when available, the computer-control action log.
-2. Run `grade-run.ps1` with the run directory and the working world path. Supply `-NoHumanInterventionAttested` only when true.
+2. Run `benchmark-run.ps1 -Mode grade -RunDir <run folder> -NoHumanInterventionAttested` after save-and-quit. Supply the attestation only when true.
 3. Retain the resulting `result.json`, plus the captures in `evaluator/preflight` and `evaluator/postrun`. These are the audit artifacts for the run.
 4. Treat a run as scored only when its result is `success`, which requires both completion and integrity. `failure` means the target was not completed under valid conditions; `invalid` means a protocol check failed.
 5. Reset the benchmark runtime before the next attempt. Never reuse the working world for another scored attempt; restore a new scenario world first.

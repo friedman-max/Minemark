@@ -2,26 +2,33 @@
 
 Minemark scores a completed run from private Minecraft save data, rather than a human observation or an agent-visible API. Keep the scenario snapshot, run folder, evaluator output, logs, and recordings outside the agent's context until the run ends.
 
-## 1. Prepare an isolated run
+## One-command workflow
 
 ~~~powershell
-.\tools\start-run.ps1 -ScenarioId random-survival-peaceful-001 -Model gpt-5.6-terra -ReasoningEffort low -AgentRuntimeVersion "Codex desktop"
-.\tools\reset-benchmark-runtime.ps1
-.\tools\restore-scenario.ps1 -RunDir .\runs\run-001
-.\tools\preflight-run.ps1 -RunDir .\runs\run-001 -WorldPath "C:\MinemarkRuntime\.minecraft\saves\Minemark-run-001"
+.\tools\benchmark-run.ps1 -Mode prepare -Model gpt-5.6-terra -ReasoningEffort low -AgentRuntimeVersion "Codex desktop" -FreshTaskAttested -PriorContextExcludedAttested
 ~~~
 
-`setup-benchmark-runtime.ps1` creates the one-time isolated Minecraft runtime at `C:\MinemarkRuntime\.minecraft` and registers the `Minemark Benchmark` Launcher installation. Use that installation for every scored attempt. `reset-benchmark-runtime.ps1` restores the fixed client settings before each run.
+This command resets the isolated client, creates the run folder, restores a fresh world, runs preflight, records model metadata, and marks the run ready. It prints the run ID, world name, and prompt path.
 
-`restore-scenario.ps1` creates a fresh working world in the isolated runtime from the immutable snapshot and refuses to overwrite an existing world. `preflight-run.ps1` hashes that working world, verifies client settings, and captures the initial player/world state. It must pass before Minecraft is opened.
+Use `-FreshTaskAttested` and `-PriorContextExcludedAttested` only when you will create a brand-new agent task and supply no previous benchmark context. The command cannot prove those facts itself.
 
-## 2. Conduct the run
+After the agent has saved and quit Minecraft, grade the same run:
+
+~~~powershell
+.\tools\benchmark-run.ps1 -Mode grade -RunDir .\runs\run-010 -NoHumanInterventionAttested -TerminationReason agent_stopped
+~~~
+
+`setup-benchmark-runtime.ps1` is a one-time setup command. It creates `C:\MinemarkRuntime\.minecraft` and registers the `Minemark Benchmark` Launcher installation. Use that installation for every scored attempt.
+
+## Manual commands
+
+The individual scripts remain available when you need to inspect or troubleshoot a stage.
 
 Start a brand-new Codex desktop task and provide only the contents of `prompt.txt`. Open the restored world from Minecraft's single-player menu. Start the timer at the first agent action and do not coach the agent or reveal world state.
 
 Stop on completion, death, timeout, disconnect, or an unrecoverable state. Save and quit Minecraft before grading so the save files are flushed.
 
-## 3. Grade the saved world
+## Grading details
 
 ~~~powershell
 .\tools\grade-run.ps1 -RunDir .\runs\run-001 -WorldPath "C:\MinemarkRuntime\.minecraft\saves\Minemark-run-001" -NoHumanInterventionAttested -ActionCount 123 -RecordingPath ".\runs\run-001\recording.mp4" -ActionLogPath ".\runs\run-001\actions.json" -TerminationReason agent_stopped

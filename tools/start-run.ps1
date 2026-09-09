@@ -6,7 +6,8 @@ param(
   [Parameter(Mandatory = $true)] [ValidateSet('none','minimal','low','medium','high','xhigh','max','ultra','not_applicable','unknown')] [string] $ReasoningEffort,
   [string] $AgentRuntimeVersion = 'unknown',
   [string] $ComputerUseRuntime = 'codex-native-windows',
-  [string] $RunsRoot = "$PSScriptRoot\..\runs"
+  [string] $RunsRoot = "$PSScriptRoot\..\runs",
+  [switch] $PassThru
 )
 
 $ErrorActionPreference = 'Stop'
@@ -82,6 +83,14 @@ $metadata.executionEnvironment = [ordered]@{
 }
 $metadata | ConvertTo-Json -Depth 10 | Set-Content -Encoding UTF8 (Join-Path $runDir 'metadata.json')
 @('Restore using restore-scenario.ps1. Do not overwrite an existing world.', 'Run preflight-run.ps1 before opening Minecraft. It verifies the private snapshot and captures the empty starting state.', 'After Minecraft is saved and quit, run grade-run.ps1. Only its result can produce a scored success.', 'Save recording.mp4 and actions.json in this run folder. Do not put evaluator output in the agent-visible environment.') | Set-Content -Encoding UTF8 (Join-Path $runDir 'README.txt')
-Write-Output "Prepared $runId"
-Write-Output "Run folder: $runDir"
-Write-Output "Prompt: $(Join-Path $runDir 'prompt.txt')"
+if ($PassThru) {
+  [pscustomobject]@{
+    RunId = $runId
+    RunDir = $runDir
+    PromptPath = (Join-Path $runDir 'prompt.txt')
+  }
+} else {
+  Write-Output "Prepared $runId"
+  Write-Output "Run folder: $runDir"
+  Write-Output "Prompt: $(Join-Path $runDir 'prompt.txt')"
+}

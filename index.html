@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f9f9f6">
+<meta name="description" content="Minemark studies how AI agents act in Minecraft. Defined objectives, visible computer control, and inspectable outcomes. Explore the pilot observations and evaluation protocol.">
+<title>Minemark — Intelligence in the world.</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="page-shell">
+<header class="site-header">
+<a class="wordmark" href="#top" aria-label="Minemark home"><svg class="brand-symbol" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 24V0h6v6h6V0h6v6h6v18h-6V12h-6v6H6v6Z"/></svg>minemark<span class="brand-period">.</span></a>
+<nav aria-label="Main navigation"><a class="nav-link" href="#observations">Observations</a><a class="nav-link" href="#protocol">Protocol</a><a class="nav-link" href="#about">About</a></nav>
+<span class="research-status"><span class="status-dot"></span>Research preview <span class="status-version">/ 0.1</span></span>
+</header>
+<main id="main">
+<section class="hero" id="top" aria-labelledby="hero-title">
+<div class="hero-copy">
+<p class="eyebrow"><span class="small-cross" aria-hidden="true">+</span> A benchmark for embodied agents</p>
+<h1 id="hero-title">Intelligence,<br>placed in<br>the <span class="world-word">world<span class="orange-period">.</span></span></h1>
+<p class="hero-description">A simple task. An open world. Every action counts.<br class="desktop-break"> We test how AI agents turn what they see into what they do — inside Minecraft.</p>
+<div class="hero-actions"><a class="button button-dark" href="#observations">Explore observations <span aria-hidden="true">↗</span></a><a class="text-link" href="#protocol">How it works <span aria-hidden="true">↗</span></a></div>
+</div>
+<figure class="world-figure">
+<div class="figure-topline"><span>ENVIRONMENT / 001</span><span class="figure-live"><i></i>SURVIVAL · PEACEFUL</span></div>
+<div class="world-drawing"><img src="world.svg" width="600" height="450" alt="An isometric schematic of a stepped block landscape, with an orange target cube and a marked observation point."><span class="figure-coordinate coordinate-top">Y ↑</span><span class="figure-coordinate coordinate-bottom">X / Z</span><div class="target-caption"><span class="target-line"></span><span>TARGET_01<strong>Coal × 1</strong></span></div><span class="observer-caption"><i></i>AGENT VIEW</span></div>
+<figcaption><span>Observe <b>→</b> Act <b>→</b> Verify</span><span>World schematic / not a replay</span></figcaption>
+</figure>
+</section>
+<div class="environment-strip" aria-label="Evaluation environment"><span class="strip-label">THE TEST ENVIRONMENT</span><span><i class="square-icon"></i>Survival, Peaceful difficulty</span><span><i class="cursor-icon">↖</i>Screen, keyboard & mouse</span><span><i class="target-icon"></i>Inventory-verified objectives</span></div>
+<section class="observations section-block" id="observations" aria-labelledby="observations-title">
+<div class="section-index"><span>01 / OBSERVATIONS</span><span class="mono subtle">PILOT SERIES · SEP 2026</span></div>
+<div class="section-heading"><div><h2 id="observations-title">Small tasks.<br class="mobile-break"> Observable outcomes.</h2><p>What happened when we put an agent in the world.</p></div><a class="download-link" id="download-results" href="observations.json" download="minemark-pilot-observations.json">Download records <span aria-hidden="true">↓</span></a></div>
+<div class="results-toolbar"><div class="filters" role="group" aria-label="Filter observations by task"><button class="filter active" data-filter="all" aria-pressed="true">All observations <span>02</span></button><button class="filter" data-filter="coal" aria-pressed="false">Coal</button><button class="filter" data-filter="iron" aria-pressed="false">Iron</button></div><span class="results-count mono" id="results-count" aria-live="polite">2 records</span></div>
+<div class="table-scroll" role="region" aria-label="Pilot observations table" tabindex="0">
+<table><thead><tr><th scope="col">Objective</th><th scope="col">Agent</th><th scope="col">Outcome</th><th scope="col">Observed / target</th><th scope="col" class="record-heading">Record</th></tr></thead><tbody>
+<tr class="result-row" data-task="coal">
+<td><div class="objective-cell"><span class="item-tile coal-tile" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M9 5h11v4h5v13h-5v5H9v-4H5V12h4Z" fill="#272a27"/><path d="M10 9h8v4h-5v6H9v-7h1Z" fill="#64685d"/><path d="M16 21h6v3h-6Z" fill="#10130f"/></svg></span><span class="objective-name">Retrieve coal<span class="cell-note">Run 009 · pilot</span></span></div></td>
+<td><span class="agent-name">Codex</span><span class="cell-note">Desktop computer use</span></td>
+<td><span class="outcome outcome-success"><span aria-hidden="true">✓</span> Target met</span></td>
+<td><span class="quantity">4 <span>/ 1</span></span><span class="cell-note">Coal</span></td>
+<td class="record-cell"><button class="detail-button" aria-expanded="false" aria-controls="details-coal" data-details="coal" aria-label="Inspect coal observation"><span>Inspect</span><span class="expand-icon" aria-hidden="true">+</span></button></td></tr>
+<tr class="detail-row" id="details-coal" data-task="coal" hidden><td colspan="5"><div class="record-detail"><div><span class="detail-label">OBSERVED EVIDENCE</span><h3>Four coal in the hotbar.</h3><p>The selected-item label displayed “Coal” and the stack count displayed 4 in hotbar slot 9.</p></div><div><span class="detail-label">INTERPRETATION</span><p>The item objective was met. The run metadata did not confirm a fresh task, a clean world snapshot, an empty inventory, or excluded prior context. This is a pilot observation and is excluded from model comparisons.</p><a class="inline-download" href="observation-coal.json" download>Download this record <span aria-hidden="true">↓</span></a></div></div></td></tr>
+<tr class="result-row" data-task="iron">
+<td><div class="objective-cell"><span class="item-tile iron-tile" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m5 17 5-9h15l3 9-6 7H7Z" fill="#a3a59c"/><path d="m10 8 15 0-6 9H5Z" fill="#dadbd2"/><path d="m5 17 14 0 3 7H7Z" fill="#c1c3b9"/><path d="m19 17 6-9 3 9-6 7Z" fill="#7f857b"/><path d="M11 10h10l-2 3H9Z" fill="#f1f1e9"/></svg></span><span class="objective-name">Smelt iron ingots<span class="cell-note">Run 009 · continuation</span></span></div></td>
+<td><span class="agent-name">Codex</span><span class="cell-note">Same agent & world</span></td>
+<td><span class="outcome outcome-incomplete"><span aria-hidden="true">−</span> Incomplete</span></td>
+<td><span class="quantity">0 <span>/ 3</span></span><span class="cell-note">Iron ingots</span></td>
+<td class="record-cell"><button class="detail-button" aria-expanded="false" aria-controls="details-iron" data-details="iron" aria-label="Inspect iron observation"><span>Inspect</span><span class="expand-icon" aria-hidden="true">+</span></button></td></tr>
+<tr class="detail-row" id="details-iron" data-task="iron" hidden><td colspan="5"><div class="record-detail"><div><span class="detail-label">OBSERVED EVIDENCE</span><h3>No iron ingots obtained.</h3><p>Visible inventory inspection showed no raw iron or iron ingots after the agent extended its branch mine.</p></div><div><span class="detail-label">INTERPRETATION</span><p>This attempt continued the coal pilot with the same world and context. It is not an independent benchmark run. The earlier coal outcome remains recorded separately.</p><a class="inline-download" href="observation-iron.json" download>Download this record <span aria-hidden="true">↓</span></a></div></div></td></tr>
+</tbody></table></div>
+<p class="data-note"><span class="note-marker">i</span><span>Early observations, not a leaderboard. These pilots do not satisfy the clean-start protocol and are excluded from comparative scores. Model rankings will require independent, repeatable runs.</span></p>
+<noscript><p class="data-note">Both observations are shown above. Interactive filters and expandable details require JavaScript; the complete records can be downloaded above.</p></noscript>
+</section>
+<section class="protocol section-block" id="protocol" aria-labelledby="protocol-title">
+<div class="section-index"><span>02 / THE PROTOCOL</span><span class="mono subtle">MINEMARK-RETRIEVE-V1</span></div>
+<div class="protocol-intro"><h2 id="protocol-title">An open world.<br>A precise objective.</h2><div><p>Minecraft leaves room for many solutions. The finish line stays fixed: obtain a specific item and keep it in your inventory.</p><p class="muted">The protocol is designed to make attempts repeatable while leaving the agent’s strategy open.</p></div></div>
+<div class="protocol-steps">
+<article class="protocol-step"><div class="step-top"><span class="step-number">01</span><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 16V8h8M39 16V8h-8M9 32v8h8M39 32v8h-8M17 17h14v14H17Z"/></svg></div><h3>Start from zero.</h3><p>A fresh agent session. A restored world snapshot. An empty inventory. Every scored attempt begins at the same defined starting point.</p><span class="step-tag">CONTROLLED START</span></article>
+<article class="protocol-step"><div class="step-top"><span class="step-number">02</span><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M6 9h36v25H6ZM17 41h14M24 34v7M18 16l13 9-7 1-3 7Z"/></svg></div><h3>See. Think. Act.</h3><p>The agent uses the game screen, keyboard, and mouse. Navigation, crafting, mining, and recovery are all part of the task.</p><span class="step-tag">VISIBLE CONTROL ONLY</span></article>
+<article class="protocol-step"><div class="step-top"><span class="step-number">03</span><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 9h30v30H9ZM17 24l5 5 10-11M4 4h5M39 4h5M4 44h5M39 44h5"/></svg></div><h3>Check the result.</h3><p>A specified item and quantity, visibly retained in inventory. Record the outcome and evidence; keep setup failures out of the score.</p><span class="step-tag">BINARY COMPLETION</span></article>
+</div>
+<details class="protocol-spec"><summary><span><span class="spec-icon" aria-hidden="true">≡</span> Evaluation specification</span><span class="spec-meta">v0.1 <span class="spec-plus" aria-hidden="true">+</span></span></summary><div class="spec-content"><dl>
+<div><dt>Primary objective</dt><dd>Retrieve at least 1 coal and retain it in inventory.</dd></div>
+<div><dt>Environment</dt><dd>Random-seed Survival world, Peaceful difficulty, no bonus chest, commands disabled. Reuse a clean snapshot for comparable attempts.</dd></div>
+<div><dt>Run budget</dt><dd>15 minutes in the current coal protocol. Pilot timing is not comparable or reported as a score.</dd></div>
+<div><dt>Restricted access</dt><dd>No game commands, world-save inspection, seed lookup, inventory APIs, external notes, or evaluator output.</dd></div>
+<div><dt>Required isolation</dt><dd>A new agent task, a clean world snapshot, an empty player inventory, and no prior run context.</dd></div>
+<div><dt>Record</dt><dd>Target, quantity, outcome, verification evidence, termination reason, and isolation status. Secondary measures only when reliably recorded.</dd></div></dl>
+<a class="inline-download" id="download-protocol" href="protocol.json" download="minemark-protocol-v0.1.json">Download protocol JSON <span aria-hidden="true">↓</span></a></div></details>
+</section>
+<section class="about section-block" id="about" aria-labelledby="about-title"><div class="about-copy"><p class="eyebrow">03 / WHY MINEMARK</p><h2 id="about-title">The next move<br>is the test.</h2></div><div class="about-description"><p>Knowing how to craft a pickaxe is one thing. Finding wood, navigating a landscape, making the tool, and recovering when a plan fails asks something more.</p><p>Minemark studies that gap between knowing and doing. Our starting point is item retrieval: a compact way to observe planning, spatial reasoning, and tool use through a clear outcome.</p><a class="text-link" href="#observations">Explore the first observations <span aria-hidden="true">↗</span></a></div></section>
+</main>
+<footer class="site-footer"><div class="footer-top"><a class="wordmark footer-brand" href="#top"><svg class="brand-symbol" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 24V0h6v6h6V0h6v6h6v18h-6V12h-6v6H6v6Z"/></svg>minemark<span class="brand-period">.</span></a><p>Built to measure the next move.</p><a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>Independent research · 2026</span><span>Not affiliated with Mojang or Microsoft.</span><span class="mono">PROTOCOL IN DEVELOPMENT</span></div></footer>
+</div><div class="sr-only" role="status" id="download-status"></div>
+</body></html>

@@ -1,0 +1,33 @@
+{
+  "benchmark": "minemark-retrieve-v1",
+  "stage": "pilot",
+  "comparativeScores": false,
+  "observations": [
+    {
+      "recordId": "run-009-coal",
+      "runId": "run-009",
+      "type": "pilot",
+      "agent": "Codex desktop",
+      "targetItem": "minecraft:coal",
+      "requiredCount": 1,
+      "observedCount": 4,
+      "status": "success",
+      "verification": "Visible selected-item label displayed Coal and the hotbar stack count displayed 4 in slot 9.",
+      "eligibleForComparison": false,
+      "qualification": "Pilot observation. Run metadata records a new agent task, clean snapshot, empty inventory, and excluded prior context as false."
+    },
+    {
+      "recordId": "run-009-iron-extension",
+      "runId": "run-009",
+      "type": "continuation",
+      "agent": "Codex desktop",
+      "targetItem": "minecraft:iron_ingot",
+      "requiredCount": 3,
+      "observedCount": 0,
+      "status": "incomplete",
+      "verification": "Visible inventory inspection showed no raw iron or iron ingots after extending the branch mine.",
+      "eligibleForComparison": false,
+      "qualification": "Continuation of the coal pilot with the same world and context; not an independent attempt."
+    }
+  ]
+}

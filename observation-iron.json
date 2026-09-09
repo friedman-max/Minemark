@@ -1,0 +1,13 @@
+{
+  "recordId": "run-009-iron-extension",
+  "runId": "run-009",
+  "type": "continuation",
+  "agent": "Codex desktop",
+  "targetItem": "minecraft:iron_ingot",
+  "requiredCount": 3,
+  "observedCount": 0,
+  "status": "incomplete",
+  "verification": "Visible inventory inspection showed no raw iron or iron ingots after extending the branch mine.",
+  "eligibleForComparison": false,
+  "qualification": "Continuation of the coal pilot with the same world and context; not an independent attempt."
+}

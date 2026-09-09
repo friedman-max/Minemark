@@ -1,0 +1,14 @@
+{
+  "benchmark": "minemark-retrieve-v1",
+  "version": "0.2.0",
+  "taskType": "retrieve",
+  "objective": "Obtain exactly one target item and keep it in the player inventory.",
+  "primaryMetric": "binary_success",
+  "secondaryMetrics": ["elapsed_seconds", "deaths", "action_count", "termination_reason"],
+  "agentObservation": "visible_minecraft_window_only",
+  "forbiddenAccess": ["commands", "world_save", "seed_lookup", "inventory_api", "external_notes", "evaluator_output"],
+  "freshRunRequirements": ["new_codex_task", "clean_minecraft_snapshot", "empty_player_inventory", "no_prior_run_context"],
+  "scenarios": [
+    { "id": "random-survival-peaceful-001", "targetItem": "minecraft:coal", "requiredCount": 1, "timeoutSeconds": 900, "worldMode": "random_seed_survival", "difficulty": "peaceful" }
+  ]
+}

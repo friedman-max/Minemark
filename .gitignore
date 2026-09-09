@@ -1,0 +1,19 @@
+# Private benchmark instances and raw evidence
+/scenarios/
+/runs/
+/verification-runs*/
+/recordings/
+/artifacts/
+
+# Local publishing copies and archives
+/site-publish/
+/*.zip
+
+# Local notes and retired evaluator UI
+/SITE_PLAN.md
+/evaluator-legacy.html
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.vscode/

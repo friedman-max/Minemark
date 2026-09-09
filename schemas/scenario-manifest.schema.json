@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minemark.pages.dev/schemas/scenario-manifest.schema.json",
+  "title": "Minemark scenario manifest",
+  "type": "object",
+  "required": ["schemaVersion", "instanceId", "protocolVersion", "status", "snapshot", "environment", "target", "budget", "scoring", "visibility"],
+  "properties": {
+    "schemaVersion": { "const": "minemark-scenario-v1" },
+    "instanceId": { "type": "string" },
+    "protocolVersion": { "const": "minemark-retrieve-v1" },
+    "status": { "enum": ["candidate", "validated", "retired", "excluded"] },
+    "snapshot": {
+      "type": "object",
+      "required": ["path", "integrityManifest", "playerUuid"],
+      "properties": {
+        "path": { "type": "string" },
+        "integrityManifest": { "type": "string" },
+        "playerUuid": { "type": "string" }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "required": ["minecraftVersion", "gameMode", "difficulty", "allowCommands", "bonusChest"],
+      "properties": {
+        "minecraftVersion": { "type": "string" },
+        "gameMode": { "const": "survival" },
+        "difficulty": { "enum": ["peaceful", "easy", "normal", "hard"] },
+        "allowCommands": { "const": false },
+        "bonusChest": { "const": false }
+      }
+    },
+    "target": {
+      "type": "object",
+      "required": ["item", "minimumCount", "provenance"],
+      "properties": {
+        "item": { "pattern": "^minecraft:[a-z0-9_]+$" },
+        "minimumCount": { "type": "integer", "minimum": 1 },
+        "provenance": { "enum": ["obtain_and_retain", "mine_and_retain", "craft_or_smelt_and_retain"] }
+      }
+    },
+    "budget": { "type": "object", "required": ["timeoutSeconds"], "properties": { "timeoutSeconds": { "type": "integer", "minimum": 1 } } }
+  }
+}

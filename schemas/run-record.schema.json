@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minemark.pages.dev/schemas/run-record.schema.json",
+  "title": "Minemark run record",
+  "type": "object",
+  "required": ["runId", "benchmark", "scenarioId", "agent", "startedAt", "endedAt", "outcome", "primarySuccess", "evaluator"],
+  "properties": {
+    "runId": { "type": "string", "pattern": "^run-[0-9]{3,}$" },
+    "benchmark": { "const": "minemark-retrieve-v1" },
+    "scenarioId": { "type": "string" },
+    "agent": { "type": ["string", "object"] },
+    "executionEnvironment": { "type": ["object", "null"] },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "endedAt": { "type": "string", "format": "date-time" },
+    "outcome": { "enum": ["success", "failure", "timeout", "death", "aborted", "invalid"] },
+    "primarySuccess": { "type": "boolean" },
+    "metrics": { "type": "object", "properties": { "elapsedSeconds": { "type": ["number", "null"] }, "deaths": { "type": ["integer", "null"] }, "actionCount": { "type": ["integer", "null"] }, "terminationReason": { "type": ["string", "null"] } } },
+    "evaluator": { "type": "string" },
+    "artifacts": { "type": "object", "properties": { "recordingPath": { "type": ["string", "null"] }, "actionLogPath": { "type": ["string", "null"] }, "worldSavePath": { "type": ["string", "null"] } } },
+    "notes": { "type": ["string", "null"] }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "benchmark": "minemark-retrieve-v1",
+  "version": "0.1.0",
+  "stage": "development",
+  "objective": "Obtain at least one coal and retain it in the player inventory.",
+  "primaryMetric": "binary_success",
+  "scenario": {
+    "id": "random-survival-peaceful-001",
+    "mode": "survival",
+    "difficulty": "peaceful",
+    "bonusChest": false,
+    "commands": false,
+    "timeoutSeconds": 900
+  },
+  "observation": "visible_minecraft_window_only",
+  "actions": [
+    "keyboard",
+    "mouse"
+  ],
+  "forbiddenAccess": [
+    "commands",
+    "world_save",
+    "seed_lookup",
+    "inventory_api",
+    "external_notes",
+    "evaluator_output"
+  ],
+  "freshRunRequirements": [
+    "new_agent_task",
+    "clean_minecraft_snapshot",
+    "empty_player_inventory",
+    "no_prior_run_context"
+  ],
+  "pilotNote": "Published pilot observations do not meet the clean-start requirements and are excluded from comparative scores."
+}

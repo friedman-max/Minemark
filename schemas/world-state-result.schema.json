@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minemark.pages.dev/schemas/world-state-result.schema.json",
+  "title": "Minemark world-state result",
+  "type": "object",
+  "required": ["schemaVersion", "runId", "benchmark", "protocolVersion", "scenarioId", "agent", "executionEnvironment", "target", "outcome", "primarySuccess", "completion", "integrity", "metrics", "evaluator", "artifacts"],
+  "properties": {
+    "schemaVersion": { "const": "minemark-run-result-v2" },
+    "outcome": { "enum": ["success", "failure", "invalid"] },
+    "primarySuccess": { "type": "boolean" },
+    "agent": {
+      "type": "object",
+      "required": ["label", "model", "reasoningEffort", "agentRuntimeVersion", "computerUseRuntime"],
+      "properties": {
+        "label": { "type": "string" },
+        "model": { "type": "string" },
+        "reasoningEffort": { "type": "string" },
+        "agentRuntimeVersion": { "type": "string" },
+        "computerUseRuntime": { "type": "string" }
+      }
+    },
+    "executionEnvironment": {
+      "type": "object",
+      "required": ["harnessVersion", "operatingSystem", "display", "promptSha256", "timeoutSeconds"]
+    },
+    "completion": { "type": "object", "required": ["pass", "verifier"], "properties": { "pass": { "type": "boolean" }, "verifier": { "const": "player_inventory_nbt" } } },
+    "integrity": { "type": "object", "required": ["pass", "checks"], "properties": { "pass": { "type": "boolean" }, "checks": { "type": "object" } } },
+    "target": { "type": "object", "required": ["item", "requiredCount", "initialCount", "finalCount"] },
+    "evaluator": { "const": "world-state-v1" }
+  }
+}
